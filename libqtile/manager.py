@@ -869,7 +869,12 @@ class Qtile(command.CommandObject):
 
         w = self.windowMap.get(wnd)
 
-        if w and not w.get_property("ONSCREEN_KEYBOARD"):
+        try:
+            is_keyboard = w.get_property("ONSCREEN_KEYBOARD")
+        except:
+            is_keyboard = False
+
+        if w and not is_keyboard:
             self.currentGroup.focus(self.windowMap.get(wnd), False)
             self.windowMap.get(wnd).focus(False)
 
