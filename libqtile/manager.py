@@ -815,7 +815,9 @@ class Qtile(command.CommandObject):
                 [xcb.xproto.StackMode.Above]
             )
 
-        if self.windowMap.get(wnd):
+        w = self.windowMap.get(wnd)
+
+        if w and not w.get_property("ONSCREEN_KEYBOARD"):
             self.currentGroup.focus(self.windowMap.get(wnd), False)
             self.windowMap.get(wnd).focus(False)
 
